@@ -15,3 +15,4 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/bin/composer
 RUN gem update --system
 RUN gem install compass
+RUN git config gui.encoding utf-8

@@ -1,6 +1,10 @@
 FROM php:7.1
 
-RUN apt-get update && apt-get install -y gnupg
+RUN apt-get update && apt-get install -y gnupg locales
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs npm openssh-client git p7zip zip unzip xz-utils ruby ruby-dev
 RUN npm install -g grunt

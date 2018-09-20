@@ -14,7 +14,7 @@ RUN apt-get install -y gnupg
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # install node, unzip, ssh tools and ruby
-RUN apt-get install -y nodejs npm openssh-client git p7zip zip unzip xz-utils ruby ruby-dev
+RUN apt-get install -y nodejs npm openssh-client git p7zip zip unzip xz-utils ruby ruby-dev jq
 
 # install grunt
 RUN npm install -g grunt

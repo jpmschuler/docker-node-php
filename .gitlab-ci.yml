@@ -17,3 +17,4 @@ build:
 builasdsadd:
   stage: buildasdasd
   script:
+  - echo "eek"

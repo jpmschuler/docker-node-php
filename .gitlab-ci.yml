@@ -1,12 +1,19 @@
-image: gitlab/dind
-before_script:
-- echo "docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
-- docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
-- docker info
-- export
-
 build:
+  image: docker:stable
+  services:
+  - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
   stage: build
+  before_script:
+  - echo "docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
+  - export
+  build:
+  - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - docker build -t ${CI_REGISTRY_IMAGE}:latest .
+    - docker push ${CI_REGISTRY_IMAGE}:latest
+
+builasdsadd:
+  stage: buildasdasd
   script:
-  - docker build -t ${CI_REGISTRY_IMAGE} .
-  - docker push ${CI_REGISTRY_IMAGE}

@@ -10,6 +10,9 @@ RUN locale-gen en_US.UTF-8
 # install gnupg for validity checking of external repos
 RUN apt-get install -y gnupg
 
+# install gnupg for validity checking of external repos
+RUN apt-get install -y apt-utils
+
 # add node v10 repo:
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
@@ -21,7 +24,7 @@ RUN npm install -g grunt
 
 # invstall composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '$(wget -q -O - https://composer.github.io/installer.sig)') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/bin/composer

@@ -1,6 +1,6 @@
 FROM php:7.1
 
-RUN apt-get install -y apt-utils
+#RUN apt-get install -y apt-utils
 
 # fix locales to utf-8
 RUN apt-get update && apt-get install -y locales

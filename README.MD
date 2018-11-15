@@ -1,1 +1,6 @@
-nothing
+- node.js v10
+- php v7.1
+- openssh-client
+- compass
+- grunt
+- utf-8 support

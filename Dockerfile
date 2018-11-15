@@ -1,5 +1,7 @@
 FROM php:7.1
 
+RUN apt-get install -y apt-utils
+
 # fix locales to utf-8
 RUN apt-get update && apt-get install -y locales
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
@@ -9,9 +11,6 @@ RUN locale-gen en_US.UTF-8
 
 # install gnupg for validity checking of external repos
 RUN apt-get install -y gnupg
-
-# install gnupg for validity checking of external repos
-RUN apt-get install -y apt-utils
 
 # add node v10 repo:
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -30,6 +29,6 @@ RUN php /tmp/composer-setup.php
 RUN php -r "unlink('/tmp/composer-setup.php');"
 RUN mv composer.phar /usr/bin/composer
 
-#install compass
+# install compass
 RUN gem update --system
 RUN gem install compass

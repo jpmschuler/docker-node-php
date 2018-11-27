@@ -38,3 +38,7 @@ RUN mv composer.phar /usr/bin/composer
 # install compass
 RUN gem update --system
 RUN gem install compass
+
+RUN useradd -ms /bin/bash dockeruser
+USER dockeruser
+WORKDIR /home/dockeruser

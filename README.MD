@@ -1,5 +1,5 @@
 - node.js v10
-- php v7.1
+- php v7.2
 - openssh-client
 - compass
 - grunt

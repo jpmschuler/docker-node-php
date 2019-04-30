@@ -1,4 +1,4 @@
-FROM php:7.1
+FROM php:7.2
 
 #RUN apt-get install -y apt-utils
 
@@ -22,7 +22,7 @@ RUN apt-get install -y gnupg
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # install node, unzip, ssh tools and ruby
-RUN apt-get install -y nodejs npm openssh-client git p7zip zip unzip xz-utils ruby ruby-dev jq && apt-get clean && rm -rf /var/lib/apt/lists
+RUN apt-get install -y nodejs npm openssh-client git p7zip zip php-zip unzip xz-utils ruby ruby-dev jq && apt-get clean && rm -rf /var/lib/apt/lists
 
 # install grunt
 RUN npm install -g grunt

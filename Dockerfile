@@ -34,7 +34,7 @@ RUN docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install zip
 
 # install grunt
-RUN npm install -g grunt
+RUN npm install -g grunt npm@latest
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
@@ -49,5 +49,6 @@ RUN gem update --system
 RUN gem install compass
 
 RUN useradd -ms /bin/bash dockeruser
+
 USER dockeruser
 WORKDIR /home/dockeruser

@@ -33,6 +33,13 @@ RUN docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install fileinfo  && \
     docker-php-ext-install zip
 
+
+RUN curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+RUN apt-get update -q -y
+RUN apt-get install -y google-chrome-stable
+RUN npm install chromedriver -g
+
 # install grunt
 RUN npm install -g grunt npm@latest
 

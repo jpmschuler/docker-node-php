@@ -24,12 +24,14 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 # add chrome repo
 RUN curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+RUN apt-get update
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
-    zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ && \
-    apt-get clean google-chrome-stable && \
+    zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
+    google-chrome-stable rsync && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists
 RUN docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install iconv && \

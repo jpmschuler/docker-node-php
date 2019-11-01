@@ -21,11 +21,15 @@ RUN apt-get install -y gnupg
 # add node v10 repo:
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
+# add chrome repo
+RUN curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+
 # install node, unzip, ssh tools and ruby
 RUN apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ && \
-    apt-get clean && \
+    apt-get clean google-chrome-stable && \
     rm -rf /var/lib/apt/lists
 RUN docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install iconv && \
@@ -33,15 +37,12 @@ RUN docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install fileinfo  && \
     docker-php-ext-install zip
 
+RUN useradd -ms /bin/bash dockeruser
 
-RUN curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
-RUN apt-get update -q -y
-RUN apt-get install -y google-chrome-stable
-RUN npm install chromedriver -g
+RUN npm config set prefix '/home/dockeruser/.npm-global'
+RUN npm install -g npm@latest
+RUN npm install -g grunt
 
-# install grunt
-RUN npm install -g grunt npm@latest
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
@@ -51,11 +52,15 @@ RUN php /tmp/composer-setup.php
 RUN php -r "unlink('/tmp/composer-setup.php');"
 RUN mv composer.phar /usr/bin/composer
 
+
 # install compass
 RUN gem update --system
 RUN gem install compass
 
-RUN useradd -ms /bin/bash dockeruser
+
+RUN ln -s /home/dockeruser/node_modules/chromedriver/lib/chromedriver/chromedriver /usr/local/bin/chromedriver
 
 USER dockeruser
 WORKDIR /home/dockeruser
+
+RUN npm install chromedriver

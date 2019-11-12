@@ -1,4 +1,4 @@
-FROM php:7.2
+FROM php:7.3
 
 #RUN apt-get install -y apt-utils
 
@@ -30,14 +30,15 @@ RUN apt-get update
 RUN apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
-    google-chrome-stable rsync && \
+    google-chrome-stable rsync imagemagick libmagickwand-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
 RUN docker-php-ext-configure zip --with-libzip && \
-    docker-php-ext-install iconv && \
     docker-php-ext-install gd  && \
-    docker-php-ext-install fileinfo  && \
     docker-php-ext-install zip
+
+RUN printf "\n" | pecl install imagick
+RUN docker-php-ext-enable imagick
 
 RUN useradd -ms /bin/bash dockeruser
 

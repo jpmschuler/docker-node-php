@@ -19,7 +19,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get install -y gnupg
 
 # add node v10 repo:
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # add chrome repo
 RUN curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -

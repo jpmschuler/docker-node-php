@@ -1,0 +1,19 @@
+{
+  "name": "docker-node-php",
+  "version": "3.6.0",
+  "description": "- node.js v10 - php v7.2 - openssh-client - compass - grunt - utf-8 support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.uni-due.de:softec/docker-node-php.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "build": "docker build . -t docker-node-php:latest",
+    "run": "docker run -it --rm docker-node-php:latest bash"
+  }
+}

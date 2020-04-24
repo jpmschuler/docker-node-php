@@ -57,6 +57,3 @@ RUN ln -s /home/dockeruser/node_modules/chromedriver/lib/chromedriver/chromedriv
 
 USER dockeruser
 WORKDIR /home/dockeruser
-
-mkdir -p /cache
-sudo chown -R 1000:1000 /cache

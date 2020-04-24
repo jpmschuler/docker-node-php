@@ -1,4 +1,4 @@
-FROM php:7.3
+FROM php:7.4
 
 #RUN apt-get install -y apt-utils
 
@@ -18,7 +18,7 @@ ENV LANGUAGE en_US.UTF-8
 # install gnupg for validity checking of external repos
 RUN apt-get install -y gnupg
 
-# add node v10 repo:
+# add node v12 repo:
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # add chrome repo
@@ -33,7 +33,7 @@ RUN apt-get install -y \
     google-chrome-stable rsync imagemagick libmagickwand-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
-RUN docker-php-ext-configure zip --with-libzip && \
+RUN docker-php-ext-configure zip && \
     docker-php-ext-install gd  && \
     docker-php-ext-install zip
 
@@ -44,8 +44,6 @@ RUN useradd -ms /bin/bash dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'
 RUN npm install -g npm@latest
-RUN npm install -g grunt
-
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
@@ -54,12 +52,6 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 RUN php /tmp/composer-setup.php
 RUN php -r "unlink('/tmp/composer-setup.php');"
 RUN mv composer.phar /usr/bin/composer
-
-
-# install compass
-RUN gem update --system
-RUN gem install compass
-
 
 RUN ln -s /home/dockeruser/node_modules/chromedriver/lib/chromedriver/chromedriver /usr/local/bin/chromedriver
 

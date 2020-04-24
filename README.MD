@@ -1,6 +1,5 @@
-- node.js v10
-- php v7.2
+- node.js v12
+- php v7.4
+- composer v1.10.5
 - openssh-client
-- compass
-- grunt
 - utf-8 support

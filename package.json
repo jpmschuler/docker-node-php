@@ -1,7 +1,7 @@
 {
   "name": "docker-node-php",
-  "version": "3.6.0",
-  "description": "- node.js v10 - php v7.2 - openssh-client - compass - grunt - utf-8 support",
+  "version": "4.1.0",
+  "description": "- node.js v12 - php v7.4 - openssh-client - composer - utf-8 support",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

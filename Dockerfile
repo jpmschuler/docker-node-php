@@ -16,20 +16,22 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # install gnupg for validity checking of external repos
-RUN apt-get install -y gnupg
+RUN apt-get update && apt-get install -y gnupg
 
 # add node v12 repo:
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # install node, unzip, ssh tools and ruby
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
     rsync imagemagick libmagickwand-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
+    
 RUN docker-php-ext-configure zip && \
     docker-php-ext-install gd  && \
+    docker-php-ext-install soap && \
     docker-php-ext-install zip
 
 RUN printf "\n" | pecl install imagick

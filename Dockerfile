@@ -19,7 +19,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update && apt-get install -y gnupg
 
 # add node v12 repo:
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get update && apt-get install -y \

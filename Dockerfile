@@ -52,3 +52,6 @@ RUN mv composer.phar /usr/bin/composer
 
 USER dockeruser
 WORKDIR /home/dockeruser
+
+RUN git config --global http.postBuffer 157286400
+RUN git config --global core.compression 0

@@ -25,7 +25,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get update && apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
-    rsync imagemagick libmagickwand-dev && \
+    rsync imagemagick libmagickwand-dev libnss3-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
     

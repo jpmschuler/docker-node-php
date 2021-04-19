@@ -1,6 +1,6 @@
 {
   "name": "docker-node-php",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "- node.js v12 - php v7.4 - openssh-client - composer - utf-8 support",
   "main": "index.js",
   "scripts": {

@@ -18,30 +18,15 @@ ENV LANGUAGE en_US.UTF-8
 # install gnupg for validity checking of external repos
 RUN apt-get update && apt-get install -y gnupg
 
-# add node v12 repo:
+# add node v14 repo:
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get update && apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
-    zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
-    rsync imagemagick libmagickwand-dev && \
+    rsync  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
-
-#install chromium to get all current puppeteer dependencies
-RUN apt-get update && \
-  apt-get install -y chromium && \
-     apt-get clean && \
-     rm -rf /var/lib/apt/lists
-    
-RUN docker-php-ext-configure zip && \
-    docker-php-ext-install gd  && \
-    docker-php-ext-install soap && \
-    docker-php-ext-install zip
-
-RUN printf "\n" | pecl install imagick
-RUN docker-php-ext-enable imagick
 
 RUN useradd -ms /bin/bash dockeruser
 

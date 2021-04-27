@@ -1,45 +1,12 @@
-FROM php:7.4
-
-#RUN apt-get install -y apt-utils
-
-# fix locales to utf-8
-RUN apt-get update && apt-get install -y locales
-RUN dpkg-reconfigure locales && \
-  locale-gen C.UTF-8 && \
-  /usr/sbin/update-locale LANG=C.UTF-8
-RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
-RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
-RUN locale-gen en_US.UTF-8
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-
+FROM php:7.4-cli-alpine
 # install gnupg for validity checking of external repos
-RUN apt-get update && apt-get install -y gnupg
+RUN apk add --no-cache npm openssh-client git zip unzip rsync composer
 
-# add node v14 repo:
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-
-# install node, unzip, ssh tools and ruby
-RUN apt-get update && apt-get install -y \
-    nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
-    rsync  && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists
-
-RUN useradd -ms /bin/bash dockeruser
+# Tell docker that all future commands should run as the appuser user
+RUN addgroup -S dockergroup && adduser -S dockeruser -G dockergroup -s /bin/bash
+USER dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'
-RUN npm install -g npm@latest
-
-# install composer
-RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
-  && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
-  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
-RUN php /tmp/composer-setup.php
-RUN php -r "unlink('/tmp/composer-setup.php');"
-RUN mv composer.phar /usr/bin/composer
 
 USER dockeruser
 WORKDIR /home/dockeruser

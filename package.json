@@ -1,11 +1,11 @@
 {
   "name": "docker-node-php",
-  "version": "6.0.0",
-  "description": "node.js v14 - php v7.4 - openssh-client - composer - utf-8 support",
+  "version": "7.0.0",
+  "description": "php alpine with npm and composer",
   "main": "index.js",
   "scripts": {
-    "build": "docker build . -t docker-node-php:latest",
-    "run": "docker run -it --rm docker-node-php:latest bash"
+    "build": "docker build . -t docker-node-php:dev",
+    "run": "docker run -it --rm docker-node-php:dev bash"
   },
   "repository": {
     "type": "git",

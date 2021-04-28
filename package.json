@@ -1,6 +1,6 @@
 {
   "name": "docker-node-php",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "php alpine with npm and composer",
   "main": "index.js",
   "scripts": {

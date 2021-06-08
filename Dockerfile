@@ -7,6 +7,12 @@ RUN addgroup -S dockergroup && adduser -S dockeruser -G dockergroup -s /bin/bash
 USER dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'
+ENV PATH=/home/dockeruser/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+RUN npm cache clean -f
+RUN npm install -g npm@latest
+RUN npm install -g n
+RUN n stable
 
 USER dockeruser
 WORKDIR /home/dockeruser

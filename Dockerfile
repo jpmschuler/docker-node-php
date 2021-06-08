@@ -6,7 +6,7 @@ RUN npm install -g n
 RUN n stable
 
 # Tell docker that all future commands should run as the appuser user
-RUN addgroup -S dockergroup && adduser -S dockeruser -G dockergroup -s /bin/bash
+RUN addgroup -S dockergroup && adduser -S dockeruser -G dockergroup -s /bin/ash
 USER dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'

@@ -23,7 +23,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get install -y \
-    nodejs npm openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
+    nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists

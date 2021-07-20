@@ -1,0 +1,16 @@
+{
+  "name": "docker-node-php",
+  "version": "3.1.2",
+  "description": "php alpine with npm and composer",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker build . -t docker-node-php:dev",
+    "run": "docker run -it --rm docker-node-php:dev bash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.uni-due.de:softec/docker-node-php.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

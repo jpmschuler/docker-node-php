@@ -19,7 +19,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get install -y gnupg
 
 # add node v10 repo:
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get install -y \

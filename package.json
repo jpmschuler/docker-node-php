@@ -1,11 +1,19 @@
 {
   "name": "docker-node-php",
-  "version": "8.1.0",
-  "description": "php alpine with npm and composer",
+  "version": "8.2.0",
+  "description": "php with npm and composer",
   "main": "index.js",
   "scripts": {
-    "build": "docker build . -t docker-node-php:dev",
-    "run": "docker run -it --rm docker-node-php:dev bash"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:latest && npm run build:current",
+    "build:latest": "docker build . -t jpmschuler/docker-node-php:latest",
+    "build:current": "docker build . -t jpmschuler/docker-node-php:$(npm pkg get version | tr -d '\"')",
+    "dockerpush": "npm run dockerpush:latest && npm run dockerpush:current",
+    "dockerpush:latest": "docker push jpmschuler/docker-node-php:latest",
+    "dockerpush:current": "docker push jpmschuler/docker-node-php:$(npm pkg get version | tr -d '\"')",
+    "tag:current": "git tag $(npm pkg get version | tr -d '\"')",
+    "git:push": "git push; git push --tags",
+    "release": "npm run build && npm run dockerpush && npm run git:push"
   },
   "repository": {
     "type": "git",

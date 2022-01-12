@@ -18,22 +18,17 @@ ENV LANGUAGE en_US.UTF-8
 # install gnupg for validity checking of external repos
 RUN apt-get update && apt-get install -y gnupg
 
-# add node v14 repo:
+# add node v16 repo:
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get update && apt-get install -y \
     nodejs openssh-client git p7zip zip unzip libzip-dev xz-utils ruby ruby-dev jq \
     zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev g++ \
-    rsync imagemagick libmagickwand-dev && \
+    rsync imagemagick libmagickwand-dev  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists
 
-#install chromium to get all current puppeteer dependencies
-RUN apt-get update && \
-  apt-get install -y chromium && \
-     apt-get clean && \
-     rm -rf /var/lib/apt/lists
 
 RUN docker-php-ext-configure zip && \
     docker-php-ext-install gd  && \
@@ -47,6 +42,10 @@ RUN useradd -ms /bin/bash dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'
 RUN npm install -g npm@latest
+RUN npm install -g pnpm fixpack
+
+# add node-gyp and headers \
+RUN export NODEVERSION=$(node --version); mkdir -p /home/root/node-headers/; curl -k -o /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz -L https://nodejs.org/download/release/${NODEVERSION}/node-${NODEVERSION}-headers.tar.gz; npm config set tarball /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \

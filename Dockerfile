@@ -1,4 +1,4 @@
-FROM php:7.4
+FROM php:8.1
 
 #RUN apt-get install -y apt-utils
 

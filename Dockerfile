@@ -53,7 +53,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 RUN php /tmp/composer-setup.php
 RUN php -r "unlink('/tmp/composer-setup.php');"
-RUN mv composer.phar /usr/bin/composer
+RUN mv composer.phar /usr/local/bin/composer
 RUN ln -s /usr/local/bin/php /usr/local/bin/php7.4
 
 USER dockeruser

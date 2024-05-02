@@ -42,10 +42,7 @@ RUN useradd -ms /bin/bash dockeruser
 
 RUN npm config set prefix '/home/dockeruser/.npm-global'
 RUN npm install -g npm@latest
-RUN npm install -g pnpm fixpack
-
-# add node-gyp and headers \
-RUN export NODEVERSION=$(node --version); mkdir -p /home/root/node-headers/; curl -k -o /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz -L https://nodejs.org/download/release/${NODEVERSION}/node-${NODEVERSION}-headers.tar.gz; export npm_config_tarball="/home/root/node-headers/node-${NODEVERSION}-headers.tar.gz"
+RUN npm install -g pnpm fixpack yarn
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \

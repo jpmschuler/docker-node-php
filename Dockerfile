@@ -19,7 +19,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update && apt-get install -y gnupg
 
 # add node v16 repo:
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get update && apt-get install -y \
@@ -45,7 +45,7 @@ RUN npm install -g npm@latest
 RUN npm install -g pnpm fixpack
 
 # add node-gyp and headers \
-RUN export NODEVERSION=$(node --version); mkdir -p /home/root/node-headers/; curl -k -o /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz -L https://nodejs.org/download/release/${NODEVERSION}/node-${NODEVERSION}-headers.tar.gz; npm config set tarball /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz
+RUN export NODEVERSION=$(node --version); mkdir -p /home/root/node-headers/; curl -k -o /home/root/node-headers/node-${NODEVERSION}-headers.tar.gz -L https://nodejs.org/download/release/${NODEVERSION}/node-${NODEVERSION}-headers.tar.gz; export npm_config_tarball="/home/root/node-headers/node-${NODEVERSION}-headers.tar.gz"
 
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \

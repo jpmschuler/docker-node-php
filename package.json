@@ -1,13 +1,13 @@
 {
   "name": "docker-node-php",
-  "version": "10.0.2",
+  "version": "10.0.3",
   "description": "php with npm and composer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:latest && npm run build:current",
-    "build:latest": "docker build . -t jpmschuler/docker-node-php:latest",
-    "build:current": "docker build . -t jpmschuler/docker-node-php:$(npm pkg get version | tr -d '\"')",
+    "build:latest": "docker build --platform linux/amd64 . -t jpmschuler/docker-node-php:latest",
+    "build:current": "docker build --platform linux/amd64 . -t jpmschuler/docker-node-php:$(npm pkg get version | tr -d '\"')",
     "dockerpush": "npm run dockerpush:latest && npm run dockerpush:current",
     "dockerpush:latest": "docker push jpmschuler/docker-node-php:latest",
     "dockerpush:current": "docker push jpmschuler/docker-node-php:$(npm pkg get version | tr -d '\"')",

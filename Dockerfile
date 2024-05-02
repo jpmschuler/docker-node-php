@@ -44,6 +44,9 @@ RUN npm config set prefix '/home/dockeruser/.npm-global'
 RUN npm install -g npm@latest
 RUN npm install -g pnpm fixpack yarn
 
+# add node-gyp and headers \
+RUN export NODEVERSION=$(node --version); mkdir -p /home/root/node-headers/; curl -k -o /home/root/node-headers/node-headers.tar.gz -L https://nodejs.org/download/release/${NODEVERSION}/node-${NODEVERSION}-headers.tar.gz;
+
 # install composer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
@@ -56,3 +59,5 @@ RUN ln -s /usr/local/bin/php /usr/local/bin/php8.1
 USER dockeruser
 WORKDIR /home/dockeruser
 ENV PATH=/home/dockeruser/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV npm_config_tarball="/home/root/node-headers/node-headers.tar.gz"
+ENTRYPOINT [ "/bin/sh" ]

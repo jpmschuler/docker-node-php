@@ -60,4 +60,4 @@ USER dockeruser
 WORKDIR /home/dockeruser
 ENV PATH=/home/dockeruser/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV npm_config_tarball="/home/root/node-headers/node-headers.tar.gz"
-ENTRYPOINT [ "/bin/sh" ]
+ENTRYPOINT [ "/bin/bash" ]

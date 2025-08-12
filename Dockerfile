@@ -1,4 +1,4 @@
-FROM php:8.1
+FROM php:8.3
 
 #RUN apt-get install -y apt-utils
 
@@ -19,7 +19,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update && apt-get install -y gnupg
 
 # add node v16 repo:
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
 
 # install node, unzip, ssh tools and ruby
 RUN apt-get update && apt-get install -y \

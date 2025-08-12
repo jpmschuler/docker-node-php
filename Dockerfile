@@ -54,7 +54,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 RUN php /tmp/composer-setup.php
 RUN php -r "unlink('/tmp/composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
-RUN ln -s /usr/local/bin/php /usr/local/bin/php8.1
+RUN ln -s /usr/local/bin/php /usr/local/bin/php8.3
 
 USER dockeruser
 WORKDIR /home/dockeruser

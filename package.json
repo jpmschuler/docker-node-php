@@ -1,6 +1,6 @@
 {
   "name": "docker-node-php",
-  "version": "11.0.0",
+  "version": "11.0.2",
   "description": "php with npm and composer",
   "main": "index.js",
   "scripts": {
